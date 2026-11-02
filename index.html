@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Doom Fire</title>
+    <meta name="description" content="Fuego de Doom interactivo. Grilla, decay, viento, dirección y paleta en vivo.">
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="app">
+      <main class="stage" id="stage">
+        <canvas id="fire" width="80" height="50" aria-label="Fuego de Doom. Clic izquierdo pinta, clic derecho apaga."></canvas>
+      </main>
+      <aside class="panel">
+        <div class="panel-header">
+          <h1>Doom Fire</h1>
+          <p class="hint">Clic izquierdo pinta. Clic derecho apaga.</p>
+        </div>
+        <form id="controls">
+          <fieldset>
+            <legend>Grilla</legend>
+            <label>
+              <span>Columnas <output for="columns">80</output></span>
+              <input id="columns" name="columns" type="range" min="8" max="200" value="80">
+            </label>
+            <label>
+              <span>Filas <output for="rows">50</output></span>
+              <input id="rows" name="rows" type="range" min="8" max="140" value="50">
+            </label>
+            <label>
+              <span>FPS <output for="fps">20</output></span>
+              <input id="fps" name="fps" type="range" min="1" max="60" value="20">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Fuente</legend>
+            <label>
+              <span>Intensidad <output for="source-intensity">36</output></span>
+              <input id="source-intensity" name="sourceIntensity" type="range" min="0" max="36" value="36">
+            </label>
+            <label>
+              <span>Grosor <output for="source-thickness">1</output></span>
+              <input id="source-thickness" name="sourceThickness" type="range" min="1" max="20" value="1">
+            </label>
+            <label>
+              <span>Dirección</span>
+              <select name="direction">
+                <option value="up" selected>Arriba</option>
+                <option value="down">Abajo</option>
+                <option value="left">Izquierda</option>
+                <option value="right">Derecha</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Propagación</legend>
+            <label>
+              <span>Decay mínimo <output for="decay-min">0</output></span>
+              <input id="decay-min" name="decayMin" type="range" min="0" max="8" value="0">
+            </label>
+            <label>
+              <span>Decay máximo <output for="decay-max">2</output></span>
+              <input id="decay-max" name="decayMax" type="range" min="0" max="8" value="2">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Viento</legend>
+            <label>
+              <span>Modo</span>
+              <select name="windMode">
+                <option value="classic" selected>Clásico</option>
+                <option value="fixed">Fijo</option>
+                <option value="oscillating">Oscilante</option>
+              </select>
+            </label>
+            <label data-wind="sign" hidden>
+              <span>Sentido</span>
+              <select name="windSign">
+                <option value="-1" selected>Izquierda</option>
+                <option value="0">Quieto</option>
+                <option value="1">Derecha</option>
+              </select>
+            </label>
+            <label data-wind="spread" hidden>
+              <span>Dispersión <output for="wind-spread">2</output></span>
+              <input id="wind-spread" name="windSpread" type="range" min="0" max="8" value="2">
+            </label>
+            <label data-wind="period" hidden>
+              <span>Período (s) <output for="wind-period">4</output></span>
+              <input id="wind-period" name="windPeriod" type="range" min="1" max="20" value="4">
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Color</legend>
+            <label>
+              <span>Largo de paleta <output for="palette-size">37</output></span>
+              <input id="palette-size" name="paletteSize" type="range" min="8" max="64" value="37">
+            </label>
+            <label>
+              <span>Preset</span>
+              <select name="preset">
+                <option value="doom" selected>Doom</option>
+                <option value="blue">Azul</option>
+                <option value="pink">Rosa</option>
+                <option value="custom">Propia</option>
+              </select>
+            </label>
+            <div class="colors">
+              <label>
+                <span>Frío</span>
+                <input name="cold" type="color" value="#070707">
+              </label>
+              <label>
+                <span>Medio</span>
+                <input name="mid" type="color" value="#cf6f0f">
+              </label>
+              <label>
+                <span>Caliente</span>
+                <input name="hot" type="color" value="#ffffff">
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button id="pause" type="button" aria-pressed="false">Pausa</button>
+            <button id="reset" type="button">Reiniciar</button>
+            <button id="classic" type="button">Doom clásico</button>
+          </div>
+        </form>
+      </aside>
+    </div>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
